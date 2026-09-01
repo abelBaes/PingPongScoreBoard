@@ -57,11 +57,13 @@ fun MainScreen(modifier: Modifier = Modifier) {
             PlayerCard(
                 playerName = "Jogador A",
                 playerPoints = 0,
+                addPoints = {},
                 Modifier.weight(1f)
             )
             PlayerCard(
                 playerName = "Jogador B",
                 playerPoints = 0,
+                addPoints = {},
                 Modifier.weight(1f)
             )
         }
@@ -82,7 +84,10 @@ fun MainScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun PlayerCard(playerName: String, playerPoints: Int, modifier: Modifier = Modifier) {
+fun PlayerCard(playerName: String,
+               playerPoints: Int,
+               addPoints: () -> Unit,
+               modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -99,7 +104,7 @@ fun PlayerCard(playerName: String, playerPoints: Int, modifier: Modifier = Modif
             textAlign = TextAlign.Center
         )
         Button(
-            onClick = {},
+            onClick = {addPoints},
             modifier = Modifier
                 .wrapContentSize()
                 .padding(10.dp)
