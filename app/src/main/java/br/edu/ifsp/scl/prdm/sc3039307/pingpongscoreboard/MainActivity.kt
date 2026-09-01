@@ -54,14 +54,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(20.dp)
         )
         Row(modifier = Modifier.fillMaxWidth()) {
-            TeamCard(
-                teamName = "Jogador A",
-                teamPoints = 0,
+            PlayerCard(
+                playerName = "Jogador A",
+                playerPoints = 0,
                 Modifier.weight(1f)
             )
-            TeamCard(
-                teamName = "Jogador B",
-                teamPoints = 0,
+            PlayerCard(
+                playerName = "Jogador B",
+                playerPoints = 0,
                 Modifier.weight(1f)
             )
         }
@@ -82,19 +82,19 @@ fun MainScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TeamCard(teamName: String, teamPoints: Int, modifier: Modifier = Modifier) {
+fun PlayerCard(playerName: String, playerPoints: Int, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = teamName,
+            text = playerName,
             fontSize = 25.sp,
             textAlign = TextAlign.Center
         )
         Text(
-            text = "$teamPoints",
+            text = "$playerPoints",
             fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
