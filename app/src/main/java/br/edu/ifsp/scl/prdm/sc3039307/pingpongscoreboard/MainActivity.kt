@@ -104,7 +104,7 @@ fun PlayerCard(playerName: String,
             textAlign = TextAlign.Center
         )
         Button(
-            onClick = {addPoints},
+            onClick = {addPoints()},
             modifier = Modifier
                 .wrapContentSize()
                 .padding(10.dp)
