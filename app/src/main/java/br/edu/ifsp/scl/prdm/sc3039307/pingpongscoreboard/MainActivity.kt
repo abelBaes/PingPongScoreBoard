@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.edu.ifsp.scl.prdm.sc3039307.pingpongscoreboard.ui.theme.PingPongScoreBoardTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,9 +46,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
-    var playerAPoints by remember { mutableIntStateOf(0) }
-    var playerBPoints by remember { mutableIntStateOf(0) }
+fun MainScreen(modifier: Modifier = Modifier, scoreBoardViewModel: ScoreBoardViewModel = viewModel()) {
     Column(
         modifier = modifier
             .fillMaxWidth(),
@@ -62,20 +61,19 @@ fun MainScreen(modifier: Modifier = Modifier) {
         Row(modifier = Modifier.fillMaxWidth()) {
             PlayerCard(
                 playerName = "Jogador A",
-                playerPoints = playerAPoints,
-                addPoints = {playerAPoints++},
+                playerPoints = scoreBoardViewModel.playerAPoints,
+                addPoints = {scoreBoardViewModel.addPointsPlayerA()},
                 Modifier.weight(1f)
             )
             PlayerCard(
                 playerName = "Jogador B",
-                playerPoints = playerBPoints,
-                addPoints = {playerBPoints++},
+                playerPoints = scoreBoardViewModel.playerBPoints,
+                addPoints = {scoreBoardViewModel.addPointsPlayerB()},
                 Modifier.weight(1f)
             )
         }
         Button(
-            onClick = {playerAPoints = 0
-                       playerBPoints = 0},
+            onClick = {scoreBoardViewModel.restartMatch()},
             modifier = Modifier
                 .wrapContentSize()
                 .padding(10.dp)
