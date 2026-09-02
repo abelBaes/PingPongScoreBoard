@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import br.edu.ifsp.scl.prdm.sc3039307.pingpongscoreboard.ui.theme.PingPongScoreBoardTheme
 
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, scoreBoardViewModel: ScoreBoardViewModel = viewModel()) {
+    val playersPointsState by scoreBoardViewModel.uiPlayerPoints.collectAsStateWithLifecycle()
     Column(
         modifier = modifier
             .fillMaxWidth(),
@@ -61,13 +63,13 @@ fun MainScreen(modifier: Modifier = Modifier, scoreBoardViewModel: ScoreBoardVie
         Row(modifier = Modifier.fillMaxWidth()) {
             PlayerCard(
                 playerName = "Jogador A",
-                playerPoints = scoreBoardViewModel.playerAPoints,
+                playerPoints = playersPointsState.playerAPoints,
                 addPoints = {scoreBoardViewModel.addPointsPlayerA()},
                 Modifier.weight(1f)
             )
             PlayerCard(
                 playerName = "Jogador B",
-                playerPoints = scoreBoardViewModel.playerBPoints,
+                playerPoints = playersPointsState.playerBPoints,
                 addPoints = {scoreBoardViewModel.addPointsPlayerB()},
                 Modifier.weight(1f)
             )

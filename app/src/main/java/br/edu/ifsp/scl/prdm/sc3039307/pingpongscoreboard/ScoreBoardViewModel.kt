@@ -4,25 +4,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class ScoreBoardViewModel: ViewModel() {
-    var playerAPoints by mutableIntStateOf(0)
-        private set
 
-    var playerBPoints by mutableIntStateOf(0)
-        private set
+    private val _uiPlayersPoints = MutableStateFlow(PlayersPoints())
+    val uiPlayerPoints: StateFlow<PlayersPoints> = _uiPlayersPoints.asStateFlow()
 
     fun addPointsPlayerA(){
-        playerAPoints++
+        _uiPlayersPoints.update {it.copy(playerAPoints = it.playerAPoints + 1)}
     }
 
     fun addPointsPlayerB(){
-        playerBPoints++
+        _uiPlayersPoints.update {it.copy(playerBPoints = it.playerBPoints + 1)}
     }
 
     fun restartMatch(){
-        playerAPoints = 0
-        playerBPoints = 0
+        _uiPlayersPoints.update {it.copy(playerAPoints = 0, playerBPoints = 0)}
     }
 
 }
