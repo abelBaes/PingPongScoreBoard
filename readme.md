@@ -7,7 +7,7 @@
 | remember                     | Não sobrevive   | Não sobrevive     |
 | ViewModel + mutableStateOf   | Sobrevive       | Não sobrevive     |
 | ViewModel + StateFlow        | Sobrevive       | Não sobrevive     |
-| ViewModel + SavedStateHandle |                 |                   |
+| ViewModel + SavedStateHandle | Sobrevive       | Sobrevive         |
 
 ## Perguntas
 
