@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -42,6 +46,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
+    var playerAPoints by remember { mutableIntStateOf(0) }
+    var playerBPoints by remember { mutableIntStateOf(0) }
     Column(
         modifier = modifier
             .fillMaxWidth(),
@@ -56,19 +62,20 @@ fun MainScreen(modifier: Modifier = Modifier) {
         Row(modifier = Modifier.fillMaxWidth()) {
             PlayerCard(
                 playerName = "Jogador A",
-                playerPoints = 0,
-                addPoints = {},
+                playerPoints = playerAPoints,
+                addPoints = {playerAPoints++},
                 Modifier.weight(1f)
             )
             PlayerCard(
                 playerName = "Jogador B",
-                playerPoints = 0,
-                addPoints = {},
+                playerPoints = playerBPoints,
+                addPoints = {playerBPoints++},
                 Modifier.weight(1f)
             )
         }
         Button(
-            onClick = {},
+            onClick = {playerAPoints = 0
+                       playerBPoints = 0},
             modifier = Modifier
                 .wrapContentSize()
                 .padding(10.dp)
